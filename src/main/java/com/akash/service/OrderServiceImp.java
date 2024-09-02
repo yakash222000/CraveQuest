@@ -1,16 +1,26 @@
 package com.akash.service;
 
-import com.akash.model.*;
-import com.akash.repository.*;
-import com.akash.request.OrderRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.akash.model.Address;
+import com.akash.model.Cart;
+import com.akash.model.CartItem;
+import com.akash.model.Order;
+import com.akash.model.OrderItem;
+import com.akash.model.Restaurant;
+import com.akash.model.User;
+import com.akash.repository.AddressRepository;
+import com.akash.repository.OrderItemRepository;
+import com.akash.repository.OrderRepository;
+import com.akash.repository.UserRepository;
+import com.akash.request.OrderRequest;
 
 @Service
 public class OrderServiceImp implements OrderService {
@@ -90,7 +100,6 @@ public class OrderServiceImp implements OrderService {
         }
 
         throw new Exception("Please enter valid order status");
-        return null;
     }
 
     @Override
@@ -101,12 +110,12 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public List<Order> getUserOrder(Long userId) throws Exception {
-        return orderRepository.findByUserId(userId);
+        return orderRepository.findByCustomer_Id(userId);
     }
 
     @Override
     public List<Order> getRestaurantOrder(Long restaurantId, String orderStatus) throws Exception {
-        List<Order> orders=orderRepository.findByRestaurantId(restaurantId);
+        List<Order> orders=orderRepository.findByRestaurant_Id(restaurantId);
         if(orderStatus!=null){
             orders=orders.stream().filter(order ->
                     order.getOrderStatus().equals(orderStatus)).collect(Collectors.toList());

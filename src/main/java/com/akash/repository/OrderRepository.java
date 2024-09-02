@@ -1,13 +1,14 @@
 package com.akash.repository;
 
-import com.akash.model.Order;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.akash.model.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    public List<Order> findByUserId(Long userId);
+    public List<Order> findByCustomer_Id(Long userId);
 
-    public List<Order> findByRestaurantId(Long restaurantId);
+    public List<Order> findByRestaurant_Id(Long restaurantId);
 }

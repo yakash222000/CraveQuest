@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    public List<Category> findByRestaurnatId(Long id);
+    public List<Category> findByRestaurant_Id(Long id);
 
 
 }

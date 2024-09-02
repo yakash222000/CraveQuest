@@ -56,7 +56,7 @@ public class FoodServiceImp implements FoodService {
                                  boolean isSeasonal,
                                  String foodCategory) {
 
-        List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
+        List<Food> foods = foodRepository.findByRestaurant_Id(restaurantId);
 
         if(isVegetarian){
             foods=filterByVegetarian(foods,isVegetarian);
